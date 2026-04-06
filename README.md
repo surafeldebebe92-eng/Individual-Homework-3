@@ -1,6 +1,5 @@
 # Individual Homework 3 — Disparate Impact Audit
-**Course:** Responsible Machine Learning | George Washington University
-**Due:** April 6, 2026 at 12:00 PM ET
+
 **Dataset:** COMPAS (Correctional Offender Management Profiling for Alternative Sanctions)
 
 ---
@@ -9,7 +8,6 @@
 
 This project performs a full disparate impact audit on a logistic regression model
 trained to predict two-year recidivism risk using the cleaned ProPublica COMPAS dataset.
-The model and dataset cleaning pipeline are carried over directly from Homework 2 (Lecture 02).
 
 The audit examines whether the model produces discriminatory outcomes across **race** and
 **sex**, using a combination of the `solas-ai` Python library and manual statistical methods.
@@ -28,7 +26,7 @@ The audit examines whether the model produces discriminatory outcomes across **r
 
 ---
 
-## Key Metrics Defined
+## Key Metrics:
 
 | Metric | Definition |
 |--------|-----------|
@@ -38,15 +36,6 @@ The audit examines whether the model produces discriminatory outcomes across **r
 | **FPR** | False Positive Rate — % of non-recidivists incorrectly flagged as high-risk |
 | **FNR** | False Negative Rate — % of actual recidivists incorrectly flagged as low-risk |
 
----
-
-## Dependencies
-
-All packages can be installed in Google Colab with:
-
-```python
-!pip install solas-ai statsmodels -q
-```
 
 | Package | Purpose |
 |---------|---------|
@@ -61,40 +50,12 @@ All packages can be installed in Google Colab with:
 
 ## How to Run
 
-1. Open **Google Colab** at [colab.research.google.com](https://colab.research.google.com)
+1. Open **Google Colab** 
 2. Create a new notebook and paste each cell block from the homework script in order
 3. Run all cells top to bottom (`Runtime → Run all`)
-4. The COMPAS dataset is loaded automatically from the ProPublica GitHub URL — no file upload needed
+4. The COMPAS dataset is loaded automatically from the ProPublica GitHub URL. No file upload needed
 5. The bar chart is saved as `fpr_fnr_by_race.png` in the working directory
 
----
-
-## File Structure
-
-```
-Individual_Homework_3/
-├── README_HW3.md               ← This file
-├── Individual_Homework_3.ipynb ← Main notebook (Google Colab)
-├── fpr_fnr_by_race.png         ← Output figure (generated at runtime)
-└── Individual_Homework_2.ipynb ← Reference: model & data pipeline from HW2
-```
-
----
-
-## Data Pipeline (from HW2)
-
-The COMPAS dataset is fetched directly from ProPublica's public GitHub repository and
-cleaned using the same filters as the original analysis:
-
-- `days_b_screening_arrest` between −30 and +30 days
-- Exclude rows where `is_recid == -1`
-- Exclude ordinary traffic charges (`c_charge_degree == 'O'`)
-- Exclude missing scores (`score_text == 'N/A'`)
-
-**Target variable:** `high_risk = 1` if `score_text != 'Low'`, else `0`
-
-**Model:** Logistic Regression (`sklearn`, `max_iter=1000`, `random_state=42`)
-**Test accuracy:** ~74.7%
 
 ---
 
@@ -111,16 +72,6 @@ cleaned using the same filters as the original analysis:
 - **FNR:** Runs in the opposite direction — Caucasian recidivists are more often
   under-predicted — consistent with prior ProPublica reporting.
 
----
-
-## References
-
-- Angwin, J. et al. (2016). *Machine Bias*. ProPublica.
-  https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing
-- COMPAS Dataset: https://github.com/propublica/compas-analysis
-- solas-ai library: https://pypi.org/project/solas-ai/
-- U.S. Equal Employment Opportunity Commission. *Uniform Guidelines on Employee Selection
-  Procedures* (29 C.F.R. § 1607) — source of the 4/5ths (80%) rule.
 
 ---
 
@@ -129,4 +80,4 @@ cleaned using the same filters as the original analysis:
 For this assignment, Claude (Anthropic) was used to help structure the Python code for
 computing fairness metrics, running statistical tests, and generating the publication-quality
 figure. The AI assisted with code organization and error handling. All analytical
-interpretations, the compliance memo, and final review of results are the student's own work.
+interpretations, the compliance memo, and final review of results are my own work.
